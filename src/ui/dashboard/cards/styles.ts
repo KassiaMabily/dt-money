@@ -5,18 +5,16 @@ import styled from 'styled-components';
 export type VariantCard = "green" | "default";
 
 interface CardContainerProps {
-  $variant: VariantCard;
+    $variant: VariantCard;
 }
 
 export const CardContainer = styled.div<CardContainerProps>`
-  display: flex;
-  flex-direction: column;
-  /* align-items: center;
-  justify-content: center; */
-  padding: 2rem;
-  border-radius: 0.5rem;
-  background-color: ${(props) => props.$variant == "green" ? props.theme["green-300"] : props.theme["gray-600"]};
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    background-color: ${(props) => props.$variant == "green" ? props.theme["green-300"] : props.theme["gray-600"]};
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 `;
 
 export const CardHeader = styled.header`
@@ -27,9 +25,9 @@ export const CardHeader = styled.header`
 `;
 
 export const CardTitle = styled.h3`
-  font-size: 1rem;
-  font-weight: 400;
-  margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
 `;
 
 export const CardValue = styled.p`
