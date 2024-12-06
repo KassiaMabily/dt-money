@@ -1,8 +1,6 @@
-"use client"
-
-import { BanknotesIcon, ClockIcon, InboxIcon, UserGroupIcon } from '@heroicons/react/24/outline';
-import { useTheme } from 'styled-components';
-import { CardContainer, CardHeader, CardTitle, CardValue, VariantCard } from './styles';
+import {BanknotesIcon, ClockIcon, InboxIcon, UserGroupIcon} from '@heroicons/react/24/outline';
+import {CardContainer, CardHeader, CardTitle, CardValue, VariantCard} from './styles';
+import {fetchCardData} from "@/lib/data";
 
 const iconMap = {
     collected: BanknotesIcon,
@@ -14,7 +12,6 @@ const iconMap = {
 type IconType = keyof typeof iconMap;
 
 
-
 interface CardProps {
     title: string;
     value: number | string;
@@ -23,12 +20,11 @@ interface CardProps {
     iconColor?: "red" | "green" | "default";
 }
 
-export default function Card({ title, value, type, variant = "default", iconColor = "default" }: CardProps) {
-    const theme = useTheme();
+export function Card({title, value, type, variant = "default", iconColor = "default"}: CardProps) {
     const iconColors = {
-        red: theme["red-300"],
-        green: theme["green-300"],
-        default: theme["gray-100"],
+        red: '#F75A68',
+        green: '#00B37E',
+        default: '#E1E1E6',
     }
 
     const IconComponent = iconMap[type];
@@ -50,5 +46,28 @@ export default function Card({ title, value, type, variant = "default", iconColo
 
             <CardValue>{value}</CardValue>
         </CardContainer>
+    );
+}
+
+
+export default async function CardWrapper() {
+    const {
+        numberOfInvoices,
+        numberOfCustomers,
+        totalPaidInvoices,
+        totalPendingInvoices,
+    } = await fetchCardData();
+
+    return (
+        <>
+            <Card title="Collected" value={totalPaidInvoices} type="collected" variant="green"/>
+            <Card title="Pending" value={totalPendingInvoices} type="pending" iconColor="red"/>
+            <Card title="Total Invoices" value={numberOfInvoices} type="invoices" iconColor="green"/>
+            <Card
+                title="Total Customers"
+                value={numberOfCustomers}
+                type="customers"
+            />
+        </>
     );
 }

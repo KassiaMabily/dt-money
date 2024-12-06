@@ -1,5 +1,4 @@
-import { Revenue } from '@/lib/definitions';
-import { generateYAxis } from '@/lib/utils';
+import {generateYAxis} from '@/lib/utils';
 import {
     CalendarIcon,
     ChartContainer,
@@ -14,17 +13,14 @@ import {
     RevenueContainer,
     YAxisLabels
 } from './styles';
+import {fetchRevenue} from "@/lib/data";
 
 
-
-export default async function RevenueChart({
-    revenue
-}: {
-    revenue: Revenue[];
-}) {
+export default async function RevenueChart() {
+    const revenue = await fetchRevenue();
     const chartHeight = 350;
 
-    const { yAxisLabels, topLabel } = generateYAxis(revenue);
+    const {yAxisLabels, topLabel} = generateYAxis(revenue);
 
     if (!revenue || revenue.length === 0) {
         return <NoDataMessage>No data available.</NoDataMessage>;
@@ -57,7 +53,7 @@ export default async function RevenueChart({
                 </GridContainer>
 
                 <FlexContainer>
-                    <CalendarIcon />
+                    <CalendarIcon/>
                     <Last12MonthsText>Last 12 months</Last12MonthsText>
                 </FlexContainer>
             </ChartContainer>

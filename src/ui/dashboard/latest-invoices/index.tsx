@@ -1,4 +1,3 @@
-import { LatestInvoice } from '@/lib/definitions';
 import {
     ArrowPathIcon,
     Container,
@@ -14,8 +13,11 @@ import {
     Title,
     UpdatedText
 } from './styles';
+import {fetchLatestInvoices} from "@/lib/data";
 
-export default function LatestInvoices({ latestInvoices }: { latestInvoices: LatestInvoice[] }) {
+export default async function LatestInvoices() {
+    const latestInvoices = await fetchLatestInvoices();
+
     return (
         <Container>
             <Title>Latest Invoices</Title>
@@ -41,7 +43,7 @@ export default function LatestInvoices({ latestInvoices }: { latestInvoices: Lat
                 </InvoiceList>
 
                 <FlexContainer>
-                    <ArrowPathIcon />
+                    <ArrowPathIcon/>
                     <UpdatedText>Updated just now</UpdatedText>
                 </FlexContainer>
             </InvoicesContainer>
