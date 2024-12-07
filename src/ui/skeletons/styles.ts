@@ -43,6 +43,31 @@ export const SkeletonValue = styled(ShimmerEffect)`
     background-color: ${(props) => props.theme["gray-500"]};
 `;
 
+export const TableItemHeaderSkeleton = styled.th`
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem; /* px-4 */
+    padding-top: 1.25rem; /* py-5 */
+    padding-bottom: 1.25rem; /* py-5 */
+    font-weight: 500; /* font-medium */
+
+    @media (min-width: 640px) {
+        /* sm:pl-6 */
+        padding-left: 1.5rem; /* 6 * 0.25rem */
+    }
+
+    &.relative {
+        position: relative;
+        padding-left: 0.75rem; /* pl-3 */
+        padding-right: 1.5rem; /* pr-6 */
+        padding-top: 0.5rem; /* pt-2 */
+        padding-bottom: 1rem; /* pb-4 */
+
+        @media (min-width: 640px) {
+            /* sm:pr-6 */
+            padding-right: 1.5rem; /* 6 * 0.25rem */
+        }
+    }
+`;
 
 export const TableRowSkeletonContainer = styled.tr`
     width: 100%;
@@ -71,14 +96,27 @@ export const TableRowSkeletonContainer = styled.tr`
 
 export const TableCellSkeleton = styled.td`
     padding: 1rem;
-    background-color: #f3f4f6;
+    background-color: ${(props) => props.theme["gray-700"]};
+`;
+
+export const TableCellSkeletonWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+`;
+
+export const InvoicesMobileSkeletonWrapper = styled.div`
+    display: block;
+    @media (min-width: 768px) {
+        display: none;
+    }
 `;
 
 export const InvoicesMobileSkeletonContainer = styled.div`
     margin-bottom: 0.5rem;
     width: 100%;
     border-radius: 0.375rem;
-    background-color: white;
+    background-color: ${(props) => props.theme["gray-600"]};
     padding: 1rem;
 `;
 
@@ -86,7 +124,7 @@ export const InvoicesMobileSkeletonHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid ${(props) => props.theme["gray-800"]};
     padding-bottom: 2rem;
 `;
 
@@ -100,9 +138,9 @@ export const InvoicesMobileSkeletonContent = styled.div`
 export const InvoicesTableSkeletonContainer = styled.div`
     margin-top: 1.5rem;
     overflow: hidden;
-    border-radius: 0.75rem;
-    background-color: #f3f4f6;
-    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: ${(props) => props.theme["gray-600"]};
+
 
     @media (min-width: 768px) {
         padding-top: 0;
@@ -112,7 +150,8 @@ export const InvoicesTableSkeletonContainer = styled.div`
 export const InvoicesTableSkeletonTable = styled.table`
     display: none;
     width: 100%;
-    color: #1f2937;
+    color: ${(props) => props.theme["gray-100"]};
+    padding: 1rem;
 
     @media (min-width: 768px) {
         display: table;
@@ -123,10 +162,12 @@ export const InvoicesTableSkeletonHeader = styled.thead`
     text-align: left;
     font-size: 0.875rem;
     font-weight: 500;
+    padding: 1rem;
 `;
 
 export const InvoicesTableSkeletonBody = styled.tbody`
-    background-color: white;
+    background-color: ${(props) => props.theme["gray-700"]};
+    padding-top: 1rem;
 `;
 
 export const DashboardSkeletonGrid = styled.div`

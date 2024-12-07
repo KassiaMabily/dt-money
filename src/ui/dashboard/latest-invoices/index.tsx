@@ -9,11 +9,11 @@ import {
     InvoiceName,
     InvoicesContainer,
     InvoiceTextContainer,
-    InvoiceUserPhoto,
     Title,
     UpdatedText
 } from './styles';
 import {fetchLatestInvoices} from "@/lib/data";
+import {InvoiceUserPhoto} from "@/styles/global";
 
 export default async function LatestInvoices() {
     const latestInvoices = await fetchLatestInvoices();
