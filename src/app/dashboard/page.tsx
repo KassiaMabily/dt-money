@@ -14,14 +14,17 @@ export default async function Page() {
             <Title>Dashboard</Title>
             <GridContainer>
                 <Suspense fallback={<CardsSkeleton/>}>
+                    {/* @ts-expect-error Server Component */}
                     <CardWrapper/>
                 </Suspense>
             </GridContainer>
             <GridContainerLarge>
                 <Suspense fallback={<RevenueChartSkeleton/>}>
+                    {/* @ts-expect-error Server Component */}
                     <RevenueChart/>
                 </Suspense>
                 <Suspense fallback={<RevenueChartSkeleton/>}>
+                    {/* @ts-expect-error Server Component */}
                     <LatestInvoices/>
                 </Suspense>
             </GridContainerLarge>

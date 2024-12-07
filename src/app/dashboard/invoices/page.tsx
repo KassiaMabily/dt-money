@@ -1,7 +1,7 @@
 import Search from 'src/components/search';
 import {CreateInvoice} from '@/components/dashboard/invoices/buttons';
 import {Container, Header, PaginationWrapper, SearchBar, Title} from "@/app/dashboard/invoices/styles";
-import {Suspense} from "react";
+import React, {Suspense} from "react";
 import InvoicesTable from "@/components/dashboard/invoices/table";
 import {InvoicesTableSkeleton} from "@/components/ui/skeletons";
 import {fetchInvoicesPages} from "@/lib/data";
@@ -29,6 +29,7 @@ export default async function Page(props: {
                 <CreateInvoice/>
             </SearchBar>
             <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton/>}>
+                {/* @ts-expect-error Server Component */}
                 <InvoicesTable query={query} currentPage={currentPage}/>
             </Suspense>
             <PaginationWrapper>
