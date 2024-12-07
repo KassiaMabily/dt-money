@@ -7,7 +7,7 @@ interface SelectOption {
 }
 
 // Define a interface para as props do RadioGroup
-interface SelectProps {
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
     options: SelectOption[];
     name: string;
     placeholder?: string;
@@ -15,10 +15,10 @@ interface SelectProps {
 }
 
 
-export function Select({options, name, placeholder, icon}: SelectProps) {
+export function Select({options, name, placeholder, icon, ...props}: SelectProps) {
     return (
         <SelectContainer>
-            <SelectContent id={name} name={name} defaultValue="">
+            <SelectContent id={name} name={name} {...props}>
                 <option value="" disabled>
                     {placeholder ? placeholder : "Select an option"}
                 </option>

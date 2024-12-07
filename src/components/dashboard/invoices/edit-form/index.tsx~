@@ -2,7 +2,7 @@ import {CustomerField, InvoiceForm} from '@/lib/definitions';
 import {CheckIcon, ClockIcon,} from '@heroicons/react/24/outline';
 import {Button} from '@/components/ui/button';
 import {DollarIcon, UserIcon} from "@/components/dashboard/invoices/edit-form/styles";
-import {FormContainer, FormContent, FormFooter, FormGroup} from "@/components/ui/form";
+import {FormContainer, FormFooter, FormGroup} from "@/components/ui/form";
 import {Label} from "@/components/ui/form/label";
 import {InputContainer} from "@/components/ui/form/input/styles";
 import {Input} from "@/components/ui/form/input";
@@ -27,7 +27,7 @@ export default function EditInvoiceForm({
         <Fragment>
             {/* @ts-ignore */}
             <FormContainer action={updateInvoiceWithId}>
-                <FormContent>
+                <div>
                     {/* Customer Name */}
                     <FormGroup>
                         <Label htmlFor="customer">Choose customer</Label>
@@ -79,7 +79,7 @@ export default function EditInvoiceForm({
                             ]}
                         />
                     </FormGroup>
-                </FormContent>
+                </div>
                 <FormFooter>
                     <CancelButton href="/dashboard/invoices">
                         Cancel

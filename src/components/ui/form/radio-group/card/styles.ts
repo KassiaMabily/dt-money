@@ -8,28 +8,31 @@ export const RadioGroupWrapper = styled.div`
     gap: 10px;
 `;
 
-export const HiddenRadioButton = styled.input.attrs({type: 'radio'})`
+export const HiddenRadioButton = styled.input.attrs<{ $activeColor?: string }>({type: 'radio'})`
     display: none;
 
+
     &:checked + label {
-        background-color: ${(props) => props.theme["gray-900"]};
-        color: ${(props) => props.theme["gray-100"]};
+        background-color: ${(props) => props?.$activeColor ? props.$activeColor : props.theme["gray-900"]};
+        color: ${(props) => props.theme["gray-900"]};
+        border: none;
 
         &:hover {
-            background-color: ${(props) => props.theme["gray-800"]};
+            color: ${(props) => props?.$activeColor ? props.$activeColor : props.theme["gray-100"]};
         }
     }
 
     &:not(checked) + label:hover {
-        background-color: ${(props) => props.theme["gray-800"]};
+        background-color: ${(props) => props.theme["gray-900"]};
     }
 `;
 
 
-export const RadioButtonLabel = styled.label<{ $selected?: boolean }>`
-    border: 1px solid ${(props) => props.theme["gray-900"]};
+export const RadioButtonLabel = styled.label<{ $selected?: boolean, $activeColor?: string }>`
+    border: 1px solid ${(props) => props?.$activeColor ? props.$activeColor : props.theme["gray-900"]};;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s;
+    color: ${(props) => props?.$activeColor ? props.$activeColor : props.theme["gray-100"]};
 `;

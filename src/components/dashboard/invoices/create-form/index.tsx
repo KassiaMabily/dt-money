@@ -1,20 +1,21 @@
 import {CustomerField} from '@/lib/definitions';
-import {DollarIcon, FormContainer, FormFooter, FormGroup, LabelIcon, UserIcon} from './styles';
+import {DollarIcon, LabelIcon, UserIcon} from './styles';
 import RadioGroup from "@/components/ui/form/radio-group/card";
-import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import {CheckIcon, ClockIcon} from "@heroicons/react/24/outline";
 import {Select} from "src/components/ui/form/select";
 import {Label} from "@/components/ui/form/label";
 import {Input} from "@/components/ui/form/input";
+import {FormContainer, FormContent, FormFooter, FormGroup} from "@/components/ui/form";
 import {createInvoice} from "@/lib/actions";
+import {CancelButton} from "@/components/ui/button/styles";
 
 export default function Form({customers}: { customers: CustomerField[] }) {
-    
+
     return (
         // @ts-ignore
-        <form action={createInvoice}>
-            <FormContainer>
+        <FormContainer action={createInvoice}>
+            <FormContent>
                 {/* Customer Name */}
                 <FormGroup>
                     <Label htmlFor="customerId">Choose a customer</Label>
@@ -63,18 +64,15 @@ export default function Form({customers}: { customers: CustomerField[] }) {
                     />
                 </FormGroup>
 
-            </FormContainer>
+            </FormContent>
 
             <FormFooter>
-                <Link
-                    href="/dashboard/invoices"
-                    className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
-                >
+                <CancelButton href="/dashboard/invoices">
                     Cancel
-                </Link>
+                </CancelButton>
                 <Button type="submit">Create Invoice</Button>
             </FormFooter>
 
-        </form>
+        </FormContainer>
     );
 }

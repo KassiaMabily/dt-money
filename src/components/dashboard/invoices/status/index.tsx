@@ -1,18 +1,25 @@
-import {StatusContainer, StyledCheckIcon, StyledClockIcon} from "@/components/dashboard/invoices/status/styles";
+import {StatusContainer} from "@/components/dashboard/invoices/status/styles";
+import type {InvoiceStatus} from "@/lib/definitions";
+import {StyledIcon} from "@/components/ui/icon";
+import {CheckIcon, ClockIcon} from "@heroicons/react/24/outline";
 
-export default function InvoiceStatus({status}: { status: string }) {
+export default function InvoiceStatus({status}: { status: InvoiceStatus }) {
     return (
         <StatusContainer $status={status}>
             {status === 'pending' ? (
                 <>
                     Pending
-                    <StyledClockIcon/>
+                    <StyledIcon>
+                        <ClockIcon/>
+                    </StyledIcon>
                 </>
             ) : null}
             {status === 'paid' ? (
                 <>
                     Paid
-                    <StyledCheckIcon/>
+                    <StyledIcon>
+                        <CheckIcon/>
+                    </StyledIcon>
                 </>
             ) : null}
         </StatusContainer>

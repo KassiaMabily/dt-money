@@ -1,4 +1,5 @@
 import {PencilIcon, StyledLink, TrashButton, TrashIcon} from './styles';
+import {deleteInvoice} from "@/lib/actions";
 
 export function CreateInvoice() {
     return (
@@ -17,9 +18,15 @@ export function UpdateInvoice({id}: { id: string }) {
 }
 
 export function DeleteInvoice({id}: { id: string }) {
+    const deleteInvoiceWithId = deleteInvoice.bind(null, id);
+
     return (
-        <TrashButton>
-            <TrashIcon/>
-        </TrashButton>
+        // @ts-ignore
+        <form action={deleteInvoiceWithId}>
+            <TrashButton type={"submit"}>
+                <TrashIcon/>
+            </TrashButton>
+        </form>
     );
+
 }

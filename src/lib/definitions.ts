@@ -2,6 +2,8 @@
 // It describes the shape of the data, and what data type each property should accept.
 // For simplicity of teaching, we're manually defining these types.
 // However, these types are generated automatically if you're using an ORM such as Prisma.
+import {InvoiceStatusColors} from "@/lib/constants";
+
 export type User = {
     id: string;
     name: string;
@@ -16,6 +18,9 @@ export type Customer = {
     image_url: string;
 };
 
+
+export type InvoiceStatus = keyof typeof InvoiceStatusColors;
+
 export type Invoice = {
     id: string;
     customer_id: string;
@@ -23,8 +28,9 @@ export type Invoice = {
     date: string;
     // In TypeScript, this is called a string union type.
     // It means that the "status" property can only be one of the two strings: 'pending' or 'paid'.
-    status: 'pending' | 'paid';
+    status: InvoiceStatus;
 };
+
 
 export type Revenue = {
     month: string;
@@ -52,8 +58,9 @@ export type InvoicesTable = {
     image_url: string;
     date: string;
     amount: number;
-    status: 'pending' | 'paid';
+    status: InvoiceStatus;
 };
+
 
 export type CustomersTableType = {
     id: string;
@@ -84,5 +91,5 @@ export type InvoiceForm = {
     id: string;
     customer_id: string;
     amount: number;
-    status: 'pending' | 'paid';
+    status: InvoiceStatus;
 };
