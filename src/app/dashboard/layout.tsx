@@ -1,4 +1,4 @@
-import SideNav from "@/ui/dashboard/sidenav";
+import SideNav from "@/components/dashboard/sidenav";
 import {ContentWrapper, LayoutContainer, SideNavWrapper} from './layout-styles';
 
 export const experimental_ppr = true;

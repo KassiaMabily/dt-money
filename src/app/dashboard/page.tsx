@@ -1,10 +1,10 @@
-import CardWrapper from "@/ui/dashboard/cards";
-import LatestInvoices from "@/ui/dashboard/latest-invoices";
-import RevenueChart from "@/ui/dashboard/revenue-chart";
+import CardWrapper from "@/components/dashboard/cards";
+import LatestInvoices from "@/components/dashboard/latest-invoices";
+import RevenueChart from "@/components/dashboard/revenue-chart";
 import {Container, GridContainer, GridContainerLarge, Title} from "./page-styles";
-import {RevenueChartSkeleton} from "@/ui/skeletons/revenue-chart-skeleton";
+import {RevenueChartSkeleton} from "@/components/ui/skeletons/revenue-chart-skeleton";
 import {Suspense} from "react";
-import {CardsSkeleton} from "@/ui/skeletons";
+import {CardsSkeleton} from "@/components/ui/skeletons";
 
 
 export default async function Page() {
