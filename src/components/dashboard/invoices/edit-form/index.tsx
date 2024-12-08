@@ -25,7 +25,8 @@ export default function EditInvoiceForm({
 
     return (
         <Fragment>
-            {/* @ts-ignore */}
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment*/}
+            {/*   @ts-ignore */}
             <FormContainer action={updateInvoiceWithId}>
                 <FormContent>
                     {/* Customer Name */}

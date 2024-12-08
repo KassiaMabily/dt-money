@@ -20,7 +20,9 @@ export function UpdateInvoice({id}: { id: string }) {
 export function DeleteInvoice({id}: { id: string }) {
     const deleteInvoiceWithId = deleteInvoice.bind(null, id);
 
+
     return (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         <form action={deleteInvoiceWithId}>
             <TrashButton type={"submit"}>

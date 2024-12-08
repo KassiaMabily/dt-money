@@ -44,7 +44,7 @@ export const PaginationArrowContainer = styled.div<{ $isDisabled?: boolean; $dir
     border: 1px solid;
     border-color: ${(props) => props.theme["gray-500"]};
     color: ${({theme, $isDisabled}) => ($isDisabled ? theme["green-100"] : theme["gray-500"])};
-    pointer-events: ${({theme, $isDisabled}) => ($isDisabled ? 'none' : 'auto')};
+    pointer-events: ${({$isDisabled}) => ($isDisabled ? 'none' : 'auto')};
 
     &:hover {
         background-color: ${({theme, $isDisabled}) => (!$isDisabled ? theme["gray-100"] : 'inherit')};

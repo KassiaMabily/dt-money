@@ -13,6 +13,7 @@ import {CancelButton} from "@/components/ui/button/styles";
 export default function Form({customers}: { customers: CustomerField[] }) {
 
     return (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         <FormContainer action={createInvoice}>
             <FormContent>
