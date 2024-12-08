@@ -6,7 +6,11 @@ import InvoicesTable from "@/components/dashboard/invoices/table";
 import {InvoicesTableSkeleton} from "@/components/ui/skeletons";
 import {fetchInvoicesPages} from "@/lib/data";
 import Pagination from "@/components/dashboard/invoices/pagination";
+import {Metadata} from "next";
 
+export const metadata: Metadata = {
+    title: 'Invoices',
+};
 
 export default async function Page(props: {
     searchParams?: Promise<{
@@ -29,7 +33,7 @@ export default async function Page(props: {
                 <CreateInvoice/>
             </SearchBar>
             <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton/>}>
-                {/* @ts-expect-error Server Component */}
+                {/* // @ts-expect-error Server Component */}
                 <InvoicesTable query={query} currentPage={currentPage}/>
             </Suspense>
             <PaginationWrapper>
