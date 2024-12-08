@@ -47,11 +47,17 @@ export const NavLinksContainer = styled.div`
   background-color: ${(props) => props.theme["gray-900"]};
   border-radius: 0.375rem;
 
+    
+
   @media (min-width: 768px) {
     flex-direction: column;
     gap: 0;
     margin-bottom: 0.5rem;
     padding: 1rem 0.75rem;
+
+      & > * + * {
+          margin-top: 1rem; /* 1 rem = 16px */
+      }
   }
 `;
 
@@ -69,28 +75,35 @@ export const Spacer = styled.div`
 `;
 
 export const SignOutButton = styled.button`
-  display: flex;
-  height: 48px;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 0.375rem;
-  padding: 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: background-color 0.2s, color 0.2s;
+  position: relative;
+    display: flex;
+    height: 48px;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+    color: ${(props) => props.theme['gray-100']};
+    width: 75px;
+    
+    &:hover {
+        background-color: ${(props) => props.theme['gray-700']};
+        color: ${(props) => props.theme['gray-300']};
+    }
 
-  &:hover {
-    //background-color: #e0f2fe;
-    color: #2563eb;
-  }
 
-  @media (min-width: 768px) {
-    flex-grow: 0;
-    justify-content: flex-start;
-    padding: 0.5rem 0.75rem;
-  }
+    @media (min-width: 768px) {
+        flex-grow: 1;
+        justify-content: flex-start;
+        padding: 0.5rem 0.75rem;
+        background-color: ${(props) => props.theme['gray-900']};
+        border-radius: 0.375rem;
+        width: 100%;
+    }
 `;
 
 export const SignOutText = styled.div`

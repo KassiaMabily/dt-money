@@ -23,6 +23,7 @@ export const SearchBar = styled.div`
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
+    height: 3rem;
 
     @media (min-width: 768px) {
         margin-top: 2rem;

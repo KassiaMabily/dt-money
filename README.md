@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+    <img src=".github/logo.svg" alt="DT Money" />
+    <p>Simplified version of the financial dashboard</p>
+</div>
 
-## Getting Started
+<img src=".github/cover.png" alt="DT Money" />
 
-First, run the development server:
+## 💻 Overview
+Simplified version of the financial dashboard that has public home page, login page, dashboard pages that are protected by authentication and the ability for users to add, edit, and delete invoices.
+
+## ✅ Features
+
+- [x] 🏠 Public Home Page: Overview of the application and navigation to login page
+- [x] 🔑 Login Page: Secure login for users to access dashboard features
+- [x] 📊 Dashboard Pages: Protected pages displaying financial data and statistics
+- [x] 📝 Invoice Management: Add, edit, and delete invoices
+
+## 👉 Run project
+
+### Prerequisites
+
+Ensure you have the following installed on your system:
+
+- Node.js (LTS version recommended)
+- pnpm
+
+#### Setup and Run
+
+1. Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ git clone https://github.com/KassiaMabily/dt-money
+$ cd dt-money
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Import your GitHub repository inside Vercel.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Create a Postgres database**: Inside your project into vercel, select the Storage tab from your project dashboard. Select Create Database. 
+Depending on when your Vercel account was created, you may see the following options: Postgres (Powered by Neon), Neon, or Supabase. 
+Choose your preferred provider and click Continue. Once connected, navigate to the ``.env.local`` tab, click Show secret and Copy Snippet. Make sure you reveal the secrets before copying them.
 
-## Learn More
+**Generate a secret key**:  This key is used to encrypt cookies, ensuring the security of user sessions. You can do this by running the following command in your terminal:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+$ openssl rand -base64 32
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Setting Up the Frontend (Next.js)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Install dependencies
+$ pnpm install
 
-## Deploy on Vercel
+# Start the development server
+$ pnpm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API Endpoints
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Authentication
+- POST /login - Log in and receive a JWT token
+
+### Dashboard
+- GET /dashboard - Access the dashboard (protected route)
+
+### Invoices
+- GET /invoices - Get a list of invoices (protected route)
+- POST /invoices - Add a new invoice (protected route)
+- PUT /invoices/:id - Edit an existing invoice (protected route)
+- DELETE /invoices/:id - Delete an invoice (protected route)

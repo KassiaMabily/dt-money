@@ -7,6 +7,8 @@ export const SearchContainer = styled.div`
     display: flex;
     flex: 1;
     flex-shrink: 0;
+    align-items: center;
+    min-height: 100%;
 `;
 
 

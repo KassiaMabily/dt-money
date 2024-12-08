@@ -5,13 +5,11 @@ import {
     LogoContainer,
     LogoLink,
     NavLinksContainer,
-    SideNavContainer,
-    SignOutButton,
-    SignOutText,
+    SideNavContainer, SignOutButton,
     Spacer,
 } from './styles';
 import { signOut } from '@/auth';
-import {StyledIcon} from "@/components/ui/icon";
+import {LinkIcon, LinkText} from "@/components/dashboard/nav-links/styles";
 
 export default function SideNav() {
     return (
@@ -37,10 +35,10 @@ export default function SideNav() {
                     }}
                 >
                     <SignOutButton type="submit">
-                        <StyledIcon>
-                            <PowerIcon/>
-                        </StyledIcon>
-                        <SignOutText>Sign Out</SignOutText>
+                        <LinkIcon>
+                            <PowerIcon />
+                        </LinkIcon>
+                        <LinkText>Sign Out</LinkText>
                     </SignOutButton>
                 </form>
             </NavLinksContainer>

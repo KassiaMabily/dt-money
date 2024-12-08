@@ -1,20 +1,31 @@
-import Image from 'next/image';
+
 import {DeleteInvoice, UpdateInvoice} from '@/components/dashboard/invoices/buttons';
 import InvoiceStatus from '@/components/dashboard/invoices/status';
 import {formatCurrency, formatDateToLocal} from '@/lib/utils';
 import {fetchFilteredInvoices} from '@/lib/data';
 import {
-    FlexContainer,
-    FlexEndContainer,
-    MobileInvoiceContainer,
-    Table,
+    FlexEndContainer
+} from "@/components/dashboard/invoices/table/styles";
+import {MobileContainer} from "@/styles/global";
+import {
+    Table, TableBody,
     TableCell,
     TableContainer,
     TableHead,
+    TableHeaderCell,
     TableRow,
     TableWrapper
-} from "@/components/dashboard/invoices/table/styles";
-import {InvoiceUserPhoto} from "@/styles/global";
+} from "@/components/ui/table";
+import {CustomerDetail} from "@/components/dashboard/customers/customer-detail";
+import {
+    Card,
+    CardFooter,
+    CardHeader,
+    CardSummary,
+    CardSummaryItem,
+    CardSummaryLabel,
+    CardSummaryValue
+} from "@/components/ui/card";
 
 
 export default async function InvoicesTable({
@@ -32,29 +43,29 @@ export default async function InvoicesTable({
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell as="th" scope="col">Customer</TableCell>
-                            <TableCell as="th" scope="col">Email</TableCell>
-                            <TableCell as="th" scope="col">Amount</TableCell>
-                            <TableCell as="th" scope="col">Date</TableCell>
-                            <TableCell as="th" scope="col">Status</TableCell>
-                            <TableCell as="th" scope="col" className="relative">
-                            </TableCell>
+                            <TableHeaderCell as="th" scope="col">Customer</TableHeaderCell>
+                            <TableHeaderCell as="th" scope="col">Email</TableHeaderCell>
+                            <TableHeaderCell as="th" scope="col">Amount</TableHeaderCell>
+                            <TableHeaderCell as="th" scope="col">Date</TableHeaderCell>
+                            <TableHeaderCell as="th" scope="col">Status</TableHeaderCell>
+                            <TableHeaderCell as="th" scope="col" className="relative">
+                            </TableHeaderCell>
                         </TableRow>
                     </TableHead>
-                    <tbody className="bg-white">
+                    <TableBody >
                     {invoices?.map((invoice) => (
                         <TableRow key={invoice.id}>
                             <TableCell>
-                                <FlexContainer>
-                                    <InvoiceUserPhoto
-                                        src={invoice.image_url}
-                                        className="rounded-full"
-                                        width={28}
-                                        height={28}
-                                        alt={`${invoice.name}'s profile picture`}
-                                    />
-                                    <p>{invoice.name}</p>
-                                </FlexContainer>
+                                <CustomerDetail customer={{ name: invoice.name, image_url: invoice.image_url, email: invoice.email }} />
+                                {/*<FlexContainer>*/}
+                                {/*    <UserPhoto*/}
+                                {/*        src={invoice.image_url}*/}
+                                {/*        width={28}*/}
+                                {/*        height={28}*/}
+                                {/*        alt={`${invoice.name}'s profile picture`}*/}
+                                {/*    />*/}
+                                {/*    <p>{invoice.name}</p>*/}
+                                {/*</FlexContainer>*/}
                             </TableCell>
                             <TableCell>{invoice.email}</TableCell>
                             <TableCell>{formatCurrency(invoice.amount)}</TableCell>
@@ -70,32 +81,36 @@ export default async function InvoicesTable({
                             </TableCell>
                         </TableRow>
                     ))}
-                    </tbody>
+                    </TableBody>
                 </Table>
-                {invoices?.map((invoice) => (
-                    <MobileInvoiceContainer key={invoice.id}>
-                        <FlexContainer>
-                            <Image
-                                src={invoice.image_url}
-                                className="rounded-full"
-                                width={28}
-                                height={28}
-                                alt={`${invoice.name}'s profile picture`}
-                            />
-                            <p>{invoice.name}</p>
-                        </FlexContainer>
-                        <div>
-                            <p>{invoice.email}</p>
-                            <p>{formatCurrency(invoice.amount)}</p>
-                            <p>{formatDateToLocal(invoice.date)}</p>
-                            <InvoiceStatus status={invoice.status}/>
-                            <FlexEndContainer>
-                                <UpdateInvoice id={invoice.id}/>
-                                <DeleteInvoice id={invoice.id}/>
-                            </FlexEndContainer>
-                        </div>
-                    </MobileInvoiceContainer>
-                ))}
+                <MobileContainer>
+                    {invoices?.map((invoice) => (
+                        <Card key={invoice.id}>
+                            <CardHeader>
+                                <CustomerDetail customer={{ name: invoice.name, image_url: invoice.image_url, email: invoice.email }} />
+                                <InvoiceStatus status={invoice.status}/>
+                            </CardHeader>
+
+                            <CardSummary>
+                                <CardSummaryItem>
+                                    <CardSummaryLabel>Amount</CardSummaryLabel>
+                                    <CardSummaryValue>{formatCurrency(invoice.amount)}</CardSummaryValue>
+                                </CardSummaryItem>
+                                <CardSummaryItem>
+                                    <CardSummaryLabel>Date</CardSummaryLabel>
+                                    <CardSummaryValue>{formatDateToLocal(invoice.date)}</CardSummaryValue>
+                                </CardSummaryItem>
+                            </CardSummary>
+                            <CardFooter>
+                                <FlexEndContainer>
+                                    <UpdateInvoice id={invoice.id}/>
+                                    <DeleteInvoice id={invoice.id}/>
+                                </FlexEndContainer>
+                            </CardFooter>
+                        </Card>
+                    ))}
+                </MobileContainer>
+
             </TableWrapper>
         </TableContainer>
     );

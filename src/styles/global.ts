@@ -18,9 +18,10 @@ export const GlobalStyle = createGlobalStyle`
         background-color: ${(props) => props.theme['gray-800']};
         color: ${(props) => props.theme['gray-100']} !important;
         -webkit-font-smoothing: antialiased;
+        font-family: Roboto, sans-serif;
     }
 
-    body, input, textarea, button, a {
+    body, input, textarea, button {
         font: 400 1rem Roboto, sans-serif;
     }
 
@@ -41,9 +42,16 @@ export const GlobalStyle = createGlobalStyle`
 
 `
 
-export const InvoiceUserPhoto = styled(Image)`
-    margin-right: 1rem;
+export const UserPhoto = styled(Image)`
     border-radius: 9999px;
     width: 32px;
     height: 32px;
+`;
+
+export const MobileContainer = styled.div`
+    display: block;
+
+    @media (min-width: 768px) {
+        display: none;
+    }
 `;

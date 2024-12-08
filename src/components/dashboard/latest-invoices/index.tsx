@@ -13,7 +13,7 @@ import {
     UpdatedText
 } from './styles';
 import {fetchLatestInvoices} from "@/lib/data";
-import {InvoiceUserPhoto} from "@/styles/global";
+import {UserPhoto} from "@/styles/global";
 
 export default async function LatestInvoices() {
     const latestInvoices = await fetchLatestInvoices();
@@ -26,7 +26,7 @@ export default async function LatestInvoices() {
                     {latestInvoices.map((invoice, i) => (
                         <InvoiceItem key={invoice.id} $isFirst={i === 0}>
                             <InvoiceDetails>
-                                <InvoiceUserPhoto
+                                <UserPhoto
                                     src={invoice.image_url}
                                     alt={`${invoice.name}'s profile picture`}
                                     className="mr-4 rounded-full"

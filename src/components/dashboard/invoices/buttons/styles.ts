@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export const StyledLink = styled(Link)`
     display: flex;
-    height: 3rem;
     align-items: center;
     border-radius: 0.5rem;
     background-color: ${(props) => props.theme["green-300"]};
@@ -15,6 +14,7 @@ export const StyledLink = styled(Link)`
     font-weight: 500;
     color: white;
     transition: background-color 0.2s;
+    min-height: 100%;
 
     &:hover {
         background-color: ${(props) => props.theme["green-500"]};
@@ -27,10 +27,6 @@ export const StyledLink = styled(Link)`
 
     @media (min-width: 768px) {
         font-size: 1rem;
-    }
-
-    &.md\\:block {
-        display: none;
     }
 `;
 
@@ -62,10 +58,6 @@ export const TrashButton = styled.button`
 
     @media (min-width: 768px) {
         font-size: 1rem;
-    }
-
-    &.md\\:block {
-        display: none;
     }
 `;
 

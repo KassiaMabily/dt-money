@@ -26,7 +26,6 @@ export default function Search({placeholder}: { placeholder: string }) {
         <SearchContainer>
             <Input
                 id="search"
-                className="peer"
                 placeholder={placeholder}
                 onChange={(e) => {
                     handleSearch(e.target.value);
