@@ -1,3 +1,5 @@
+'use client';
+
 import {CustomerField} from '@/lib/definitions';
 import {DollarIcon, LabelIcon, UserIcon} from './styles';
 import RadioGroup from "@/components/ui/form/radio-group/card";
@@ -7,15 +9,19 @@ import {Select} from "src/components/ui/form/select";
 import {Label} from "@/components/ui/form/label";
 import {Input} from "@/components/ui/form/input";
 import {FormContainer, FormContent, FormFooter, FormGroup} from "@/components/ui/form";
-import {createInvoice} from "@/lib/actions";
+import {createInvoice, State } from "@/lib/actions";
 import {CancelButton} from "@/components/ui/button/styles";
+import { useActionState } from 'react';
+import {AlertError} from "@/components/ui/alert";
 
 export default function Form({customers}: { customers: CustomerField[] }) {
+    const initialState: State = { message: null, errors: {} };
+    const [state, formAction] = useActionState(createInvoice, initialState);
 
     return (
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        <FormContainer action={createInvoice}>
+        <FormContainer action={formAction}>
             <FormContent>
                 {/* Customer Name */}
                 <FormGroup>
@@ -28,7 +34,17 @@ export default function Form({customers}: { customers: CustomerField[] }) {
                         name={"customerId"}
                         placeholder={"Select a customer"}
                         icon={<UserIcon/>}
+                        aria-describedby="customer-error"
+                        defaultValue={""}
                     />
+                    <div id="customer-error" aria-live="polite" aria-atomic="true">
+                        {state.errors?.customerId &&
+                            state.errors.customerId.map((error: string) => (
+                                <AlertError key={error}>
+                                    {error}
+                                </AlertError>
+                            ))}
+                    </div>
                 </FormGroup>
 
                 {/* Invoice Amount */}
@@ -42,13 +58,23 @@ export default function Form({customers}: { customers: CustomerField[] }) {
                         step="0.01"
                         placeholder="Enter USD amount"
                         icon={<DollarIcon/>}
+                        aria-describedby="amount-error"
                     />
+
+                    <div id="customer-error" aria-live="polite" aria-atomic="true">
+                        {state.errors?.amount &&
+                            state.errors.amount.map((error: string) => (
+                                <AlertError key={error}>
+                                    {error}
+                                </AlertError>
+                            ))}
+                    </div>
                 </FormGroup>
 
-                {/* Invoice Status */}
                 <FormGroup>
                     <Label>Invoice Status</Label>
                     <RadioGroup
+                        aria-describedby="status-error"
                         name={"status"}
                         options={[
                             {
@@ -63,6 +89,15 @@ export default function Form({customers}: { customers: CustomerField[] }) {
                             }
                         ]}
                     />
+
+                    <div id="status-error" aria-live="polite" aria-atomic="true">
+                        {state.errors?.status &&
+                            state.errors.status.map((error: string) => (
+                                <AlertError key={error}>
+                                    {error}
+                                </AlertError>
+                            ))}
+                    </div>
                 </FormGroup>
 
             </FormContent>

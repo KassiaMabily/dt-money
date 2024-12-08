@@ -8,14 +8,14 @@ interface RadioOption {
 }
 
 // Define a interface para as props do RadioGroup
-interface RadioGroupProps {
+interface RadioGroupProps extends React.InputHTMLAttributes<HTMLInputElement>{
     options: RadioOption[];
     name: string;
     defaultValue?: string;
 }
 
 
-export default function RadioGroup({options, name, defaultValue}: RadioGroupProps) {
+export default function RadioGroup({options, name, defaultValue, ...props}: RadioGroupProps) {
 
     return (
         <RadioGroupWrapper>
@@ -27,6 +27,7 @@ export default function RadioGroup({options, name, defaultValue}: RadioGroupProp
                         value={option.value}
                         defaultChecked={defaultValue === option.value}
                         $activeColor={option.activeColor}
+                        {...props}
                     />
                     <RadioButtonLabel
                         htmlFor={option.value}

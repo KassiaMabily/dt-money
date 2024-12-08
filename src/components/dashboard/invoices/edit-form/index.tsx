@@ -10,8 +10,9 @@ import {Select} from "@/components/ui/form/select";
 import RadioGroup from "@/components/ui/form/radio-group/card";
 import {LabelIcon} from "@/components/dashboard/invoices/create-form/styles";
 import {CancelButton} from "@/components/ui/button/styles";
-import {updateInvoice} from "@/lib/actions";
-import {Fragment} from "react";
+import {State, updateInvoice} from "@/lib/actions";
+import {Fragment, useActionState} from "react";
+import {AlertError} from "@/components/ui/alert";
 
 
 export default function EditInvoiceForm({
@@ -21,13 +22,15 @@ export default function EditInvoiceForm({
     invoice: InvoiceForm;
     customers: CustomerField[];
 }) {
+    const initialState: State = { message: null, errors: {} };
     const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
+    const [state, formAction] = useActionState(updateInvoiceWithId, initialState);
 
     return (
         <Fragment>
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment*/}
             {/*   @ts-ignore */}
-            <FormContainer action={updateInvoiceWithId}>
+            <FormContainer action={formAction}>
                 <FormContent>
                     {/* Customer Name */}
                     <FormGroup>
@@ -41,7 +44,16 @@ export default function EditInvoiceForm({
                             placeholder={"Select a customer"}
                             icon={<UserIcon/>}
                             defaultValue={invoice.customer_id}
+                            aria-describedby={"customer-error"}
                         />
+                        <div id="customer-error" aria-live="polite" aria-atomic="true">
+                            {state.errors?.customerId &&
+                                state.errors.customerId.map((error: string) => (
+                                    <AlertError key={error}>
+                                        {error}
+                                    </AlertError>
+                                ))}
+                        </div>
                     </FormGroup>
 
                     {/* Invoice Amount */}
@@ -55,9 +67,19 @@ export default function EditInvoiceForm({
                                 step="0.01"
                                 defaultValue={invoice.amount}
                                 placeholder="Enter USD amount"
+                                aria-describedby="amount-error"
                             />
                             <DollarIcon/>
                         </InputContainer>
+
+                        <div id="amount-error" aria-live="polite" aria-atomic="true">
+                            {state.errors?.amount &&
+                                state.errors.amount.map((error: string) => (
+                                    <AlertError key={error}>
+                                        {error}
+                                    </AlertError>
+                                ))}
+                        </div>
                     </FormGroup>
 
                     {/* Invoice Status */}
@@ -78,7 +100,16 @@ export default function EditInvoiceForm({
                                     activeColor: "#10b981"
                                 }
                             ]}
+                            aria-describedby={"status-error"}
                         />
+                        <div id="status-error" aria-live="polite" aria-atomic="true">
+                            {state.errors?.status &&
+                                state.errors.status.map((error: string) => (
+                                    <AlertError key={error}>
+                                        {error}
+                                    </AlertError>
+                                ))}
+                        </div>
                     </FormGroup>
                 </FormContent>
                 <FormFooter>
