@@ -7,6 +7,7 @@ export const StyledButton = styled.button`
     display: flex;
     height: 2.5rem;
     align-items: center;
+    justify-content: center;
     border-radius: 0.5rem;
     background-color: ${(props) => props.theme["green-300"]};
     padding: 0 1rem;

@@ -1,5 +1,3 @@
-"use client"
-
 import NavLinks from '@/components/dashboard/nav-links';
 import {PowerIcon} from '@heroicons/react/24/outline';
 import Image from 'next/image';
@@ -9,10 +7,11 @@ import {
     NavLinksContainer,
     SideNavContainer,
     SignOutButton,
-    SignOutIcon,
     SignOutText,
     Spacer,
 } from './styles';
+import { signOut } from '@/auth';
+import {StyledIcon} from "@/components/ui/icon";
 
 export default function SideNav() {
     return (
@@ -31,11 +30,20 @@ export default function SideNav() {
             <NavLinksContainer>
                 <NavLinks/>
                 <Spacer/>
-                <SignOutButton type="submit">
-                    <SignOutIcon as={PowerIcon}/>
-                    <SignOutText>Sign Out</SignOutText>
-                </SignOutButton>
+                <form
+                    action={async () => {
+                        'use server';
+                        await signOut();
+                    }}
+                >
+                    <SignOutButton type="submit">
+                        <StyledIcon>
+                            <PowerIcon/>
+                        </StyledIcon>
+                        <SignOutText>Sign Out</SignOutText>
+                    </SignOutButton>
+                </form>
             </NavLinksContainer>
         </SideNavContainer>
-    );
+);
 }
